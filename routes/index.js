@@ -36,18 +36,14 @@ router.post('/', function (req, res, next) {
   const isAuth = req.isAuthenticated();
   const userId = req.user.id;
   const todo = req.body.add;
+  const dueDate = req.body.dueDate; // 追加
   knex("tasks")
-    .insert({user_id: userId, content: todo})
+    .insert({user_id: userId, content: todo, dueDate: dueDate}) // 追加
     .then(function () {
       res.redirect('/')
     })
     .catch(function (err) {
-      console.error(err);
-      res.render('index', {
-        title: 'ToDo App',
-        isAuth: isAuth,
-        errorMessage: [err.sqlMessage],
-      });
+      // ...existing code...
     });
 });
 
