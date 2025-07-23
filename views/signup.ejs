@@ -1,35 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= title %></title>
+  <title>サインアップ | TodoApp</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <style>
+    body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%);
+      min-height: 100vh;
+    }
+    .card {
+      margin-top: 80px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      border-radius: 1rem;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #007bff;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+  </style>
 </head>
 <body>
-<%- include('./header'); %>
-<%- include('./error_messages'); %>
-<div class="container">
-  <form action="/signup" method="post">
-    <label>ユーザ名</label>
-    <input required type="text" name="username"/>
-    <br>
-    <label>パスワード</label>
-    <input required type="password" name="password"/>
-    <br>
-    <label>パスワード再入力</label>
-    <input required type="text" name="repassword"/>
-    <br>
-    <input type="submit" value="Sign up"/>
-  </form>
-</div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
+  <%- include('./header'); %>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <div class="card p-4">
+          <div class="text-center logo">TodoApp</div>
+          <h4 class="text-center mb-4">サインアップ</h4>
+          <form action="/signup" method="post">
+            <div class="form-group">
+              <label for="username">ユーザー名</label>
+              <input type="text" class="form-control" id="username" name="username" placeholder="ユーザー名" required>
+            </div>
+            <div class="form-group">
+              <label for="password">パスワード</label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="パスワード" required>
+            </div>
+            <div class="form-group">
+              <label for="password2">パスワード（確認）</label>
+              <input type="password" class="form-control" id="password2" name="password2" placeholder="もう一度入力" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mt-3">サインアップ</button>
+          </form>
+          <div class="text-center mt-3">
+            <a href="/signin">すでにアカウントをお持ちの方はこちら</a>
+          </div>
+          <% if (typeof errorMessage !== 'undefined' && errorMessage) { %>
+            <div class="alert alert-danger mt-3"><%= errorMessage %></div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
